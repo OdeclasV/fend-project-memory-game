@@ -76,21 +76,30 @@ function dealCard () {
 
 // set up the event listener for a card
 function clickedCard() {
-	var allCards = $('.deck li');
 
+	var allCards = deck.children();
 	allCards.click(function(){
 	$(this).addClass('open show')
 
 });
+	return allCards;
 
 }
 
+function cardIcon () {
 
+	var icon = clickedCard().children();
+	icon.click(function(){
+		var iconClass = icon.attr('class');
+		console.log(iconClass)
+	})
+}
 
 // If a card is clicked:
 // - display the card's symbol (put this functionality in another function that you call from this one)
 function showCard() {
 	clickedCard();
+	cardIcon();
 }
 
 //  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
