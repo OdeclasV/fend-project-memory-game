@@ -1,5 +1,6 @@
+var oneCard = undefined;
+var openCards = [];    // creates empty array to hold cards that were opened
 var deck = $('.deck'); // selects the body of the deck
-var openCards = [];
 
 
 /*
@@ -49,7 +50,9 @@ function shuffle(array) {
     return array;
 }
 
-
+// creates card elements (li and i) on the document
+// takes no inputs
+// outputs element card inside ul element 
 function dealCard () {
 
 	var cardElm = '';
@@ -75,106 +78,37 @@ function dealCard () {
  */
 
 // set up the event listener for a card
-function clickedCard() {
+// if card is clicked, shows card's symbol
+function clickedCards() {
+	var allCards = deck.children(); // li elements
+	allCards.on('click',function(){
+		$(this).addClass('open show');
+		oneCard = $(this).find('i');
+		cardIcon(oneCard);
+		//console.log(oneCard);
 
-	var allCards = deck.children();
-	allCards.click(function(){
-	$(this).addClass('open show')
-
-});
-	return allCards;
-
-}
-
-function cardIcon () {
-
-	var icon = clickedCard().children();
-	icon.click(function(){
-		var iconClass = icon.attr('class');
-		console.log(iconClass)
 	})
+
 }
 
-// If a card is clicked:
-// - display the card's symbol (put this functionality in another function that you call from this one)
+
+function cardIcon (card) {
+	openCards.push(card);
+	if (openCards.length != 0) {
+		console.log(true)
+	}
+
+}
+
+
 function showCard() {
-	clickedCard();
-	cardIcon();
+	// If a card is clicked:
+	// - display the card's symbol (put this functionality in another function that you call from this one)
+	clickedCards();
+	//cardIcon();
 }
 
-//  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 
-
-	// if (choice1 === null) {
-	// 	choice1 = elm;
-	// 	choice1.classList.remove('hidden');
-
-	// } else if (choice2 === null) {
-	// 	choice2 = elm;
-	// 	choice2.classList.remove('hidden');
-	// 		// evaluates if value of choice1 and choice2 are the same
-	// 		if (choice1.innerHTML === choice2.innerHTML) {
-	// 			// creates var id1 and id2 to get ids of each element
-	// 			var id1 = choice1.getAttribute('id');
-	// 			var id2 = choice2.getAttribute('id');
-
-	// 			// evaluates ids of each element
-	// 			// when ids are different,
-	// 			// and classes are similar
-	// 			// elements are equal
-
-	// 			if (id1 != id2) {
-
-	// 				matches.push(choice1.innerHTML);
-	// 				matches.push(choice2.innerHTML);
-
-	// 				// preventing user clicks on same card
-	// 				// and having program accept that as choice
-	// 				choice1.onclick = null;
-	// 				choice2.onclick = null;
-
-	// 			} 
-
-	// 			choice1 = null;
-	// 			choice2 = null;
-
-	// 		} else {
-	// 			var t = setTimeout(function(){
-
-	// 				// confirming that choice1 and choice2
-	// 				// are not null
-	// 				if( choice1 && choice2 ) {
-
-	// 					choice1.classList.add('hidden');
-	// 					choice2.classList.add('hidden');
-	// 					choice1 = null;
-	// 					choice2 = null;
-	// 				}
-
-	// 			}, 800);
-
-	// 		}
-
-
-	// 	} else {
-
-	// 	// converts element back to secret
-	// 	// user tries again 
-	// 	choice1.classList.add('hidden');
-	// 	choice2.classList.add('hidden');
-	// 	choice1 = null;
-	// 	choice2 = null;
-
-	// }
-	
-	// if (matches.length === cards.length) {
-	// 	console.log(matches);
-	// 	console.log('game over');
-	// 	// cambiar nombre de start button for reset button. Cambiar innerHTML
-	// 	clearInterval(timerId);
-
-
-	// }
 
 shuffle(cards);
 dealCard();
